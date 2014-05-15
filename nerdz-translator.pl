@@ -4,6 +4,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 use strict;
 use warnings;
+no warnings 'experimental';
 use v5.10.1; # minimum Perl version required - enables smart match
 use open ':std', ':encoding(utf8)';
 use subs qw(option description);
@@ -99,7 +100,8 @@ my $my_memory = MyMemory::Translate->new (
     $configuration->{mymemory_mail}
 );
 
-my $json = JSON->new->allow_nonref->relaxed->pretty->indent_length (4); # <3
+my $json = JSON->new->allow_nonref->relaxed->pretty->canonical
+                    ->indent_length (4); # <3
 my $tok  = $bing->get_token;
 
 if (defined $configuration->{get_languages})
