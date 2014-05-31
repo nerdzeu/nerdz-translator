@@ -8,6 +8,7 @@ no warnings 'experimental';
 use v5.10.1; # minimum Perl version required - enables smart match
 use open ':std', ':encoding(utf8)';
 use Carp;
+use Encode;
 use File::Basename;
 use File::Path;
 use Getopt::Long;
@@ -196,7 +197,7 @@ sub get_manual_translations
     my $res = {};
     for (my $i = 0; $i < scalar @$arr; $i += 2)
     {
-        $res->{$arr->[$i]} = $arr->[$i + 1];
+        $res->{$arr->[$i]} = decode ('UTF-8', $arr->[$i + 1]);
         &{$code}($arr->[$i]);
     }
     $res;
