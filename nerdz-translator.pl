@@ -7,7 +7,6 @@ use warnings;
 no warnings 'experimental';
 use v5.10.1; # minimum Perl version required - enables smart match
 use open ':std', ':encoding(utf8)';
-use subs qw(option description);
 use Carp;
 use File::Basename;
 use File::Path;
@@ -144,7 +143,7 @@ foreach my $lang (@{$configuration->{translate_to}})
             lang   => $lang
         );
         my (undef, $dirs) = fileparse ($path);
-        make_path $dirs unless -d $dirs;
+        File::Path::make_path $dirs unless -d $dirs;
         my $in = {};
         if (-e $path)
         {
